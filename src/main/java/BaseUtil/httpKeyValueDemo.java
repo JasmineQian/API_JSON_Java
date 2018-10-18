@@ -1,16 +1,14 @@
-package api;
+package BaseUtil;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 
-public class getResponse {
+public class httpKeyValueDemo {
 
     private static final int READ_TIMEOUT = 100000;
     private static final int CONNECT_TIMEOUT = 150000;
@@ -34,10 +32,11 @@ public class getResponse {
         if (params != null && method == GET) {
             url = url.concat("?");
             url = url.concat(getQuery(params));
-            System.out.println("-----------"+url.toString());
+
         }
 
         this.url = new URL(url);
+        System.out.println("-----------"+url.toString());
         //HttpURLConnection conn = this.url.openConnection();
         conn = (HttpURLConnection) this.url.openConnection();
         conn.setRequestProperty("Content-Type", "application/json");
@@ -67,17 +66,6 @@ public class getResponse {
         System.out.println("-----------reponseMessage:"+reponseMessage);
         System.out.println("-----------getRequestMethod:"+conn.getRequestMethod());
 
-
-        /*
-    Exception in thread "main" java.net.ProtocolException: Cannot write output after reading input.
-	at sun.net.www.protocol.http.HttpURLConnection.getOutputStream0(HttpURLConnection.java:1330)
-	at sun.net.www.protocol.http.HttpURLConnection.getOutputStream(HttpURLConnection.java:1309)
-	at api.getResponse.request(getResponse.java:64)
-	at api.getResponse.main(getResponse.java:112)
-         */
-
-        //System.out.println("-----------getInputStream"+conn.getInputStream());
-        //System.out.println("-----------getOutputStream"+conn.getOutputStream());
         InputStreamReader streamReader =new InputStreamReader(conn.getInputStream());
         BufferedReader reader = new BufferedReader(streamReader);
         while ((line = reader.readLine()) != null) {
@@ -106,16 +94,8 @@ public class getResponse {
             result.append(URLEncoder.encode(pair.getValue(),"UTF-8"));
         }
         System.out.println(getClass().toString());
-        System.out.println("-----------getQuery"+result.toString());
+        System.out.println("-----------getQuery: "+result.toString());
         return result.toString();
     }
 
-
-    public static void main(String args[]) throws IOException {
-
-
-
-
-
-    }
 }
