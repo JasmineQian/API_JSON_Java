@@ -8,15 +8,11 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
-public class httpPostKeyValueDemo {
+public class Post04JsonKeyValue {
 
     private static final int READ_TIMEOUT = 100000;
     private static final int CONNECT_TIMEOUT = 150000;
     public static final String POST = "POST";
-    public static final String GET = "GET";
-    public static final String PUT = "PUT";
-    public static final String DELETE = "DELETE";
-    public static final String HEAD = "HEAD";
     private URL url = null;
     private HttpURLConnection conn = null;
     private OutputStream os = null;
@@ -31,7 +27,6 @@ public class httpPostKeyValueDemo {
 
         this.url = new URL(url);
         System.out.println("-----------"+url.toString());
-        //HttpURLConnection conn = this.url.openConnection();
         conn = (HttpURLConnection) this.url.openConnection();
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Charset", "utf-8");
@@ -101,3 +96,4 @@ public class httpPostKeyValueDemo {
     }
 
 }
+
