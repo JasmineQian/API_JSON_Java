@@ -3,6 +3,9 @@ package TestCase;
 import BaseUtil.Post03KeyValue;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +13,8 @@ import java.util.List;
 
 public class TestPost03KeyValue {
 
-    public static void main(String args[]) {
+    @Test
+     public void TestPost03KeyValue()   {
 
         Post03KeyValue test = new Post03KeyValue();
         List<NameValuePair> param = new ArrayList<NameValuePair>();
@@ -27,10 +31,18 @@ public class TestPost03KeyValue {
         String httpResults = null;
         try {
             httpResults = test.request("POST", "https://c.pingan.com/ca/apply/generateOTP", param);
-            System.out.println(httpResults + '\n');
-            httpResults = httpResults.replaceAll("\"", "'");//为什么要将双引号转义为单引号
-            System.out.println(httpResults + '\n');
-            System.out.println("httpResults.getClass().toString()---" + httpResults.getClass().toString()+ '\n');
+            JSONObject jsonObject = new JSONObject(httpResults);
+            String responseCode = jsonObject.getString("responseCode");
+            String responseMsg = jsonObject.getString("responseMsg");
+            System.out.println(responseCode);
+            System.out.println(responseMsg);
+
+            Assert.assertEquals(responseCode,"3041");
+            Assert.assertEquals(responseMsg,"60秒内无法重复发送短信验证码(错误码:3041)");
+
+            //httpResults = httpResults.replaceAll("\"", "'");//为什么要将双引号转义为单引号
+            //System.out.println(httpResults + '\n');
+            //System.out.println("httpResults.getClass().toString()---" + httpResults.getClass().toString()+ '\n');
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

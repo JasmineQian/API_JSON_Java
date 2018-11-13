@@ -29,9 +29,6 @@ public class Post03KeyValue {
         System.out.println("-----------"+url.toString());
         //HttpURLConnection conn = this.url.openConnection();
         conn = (HttpURLConnection) this.url.openConnection();
-        //conn.setRequestProperty("Content-Type", "application/json");
-        //conn.setRequestProperty("Charset", "utf-8");
-        //conn.setRequestProperty("Accept-Charset", "utf-8");
         conn.setRequestProperty("User-Agent","");
         conn.setReadTimeout(READ_TIMEOUT);
         conn.setConnectTimeout(CONNECT_TIMEOUT);
@@ -70,7 +67,6 @@ public class Post03KeyValue {
 
     private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
-        //result.append('{');
         System.out.println("-----------result: "+result.toString());
         boolean first = true;
 
@@ -81,16 +77,11 @@ public class Post03KeyValue {
             } else {
                 result.append("&");
             }
-            //result.append("\"");
             result.append(URLEncoder.encode(pair.getName(),"UTF-8"));
-            //result.append("\"");
             result.append("=");
-            //result.append("\"");
-            //result.append(URLEncoder.encode(pair.getValue(),"UTF-8"));
             result.append(pair.getValue());
-            //result.append("\"");
         }
-        //result.append('}');
+
         System.out.println(getClass().toString());
         System.out.println("-----------getQuery: "+result.toString());
         return result.toString();
