@@ -22,7 +22,7 @@ public class TestPost04JsonKeyValue {
         param.add(nameValuePair3);
         String httpResults = null;
         try {
-            httpResults = postKeyValueDemo.request("POST", "https://yijiauat.acxiom.com.cn/WeChatBind/certification/webservice//getCustomerAddress", param);
+            httpResults = postKeyValueDemo.request("POST", "https://ice//getCustomerAddress", param);
             System.out.println(httpResults + '\n');
             httpResults = httpResults.replaceAll("\"", "'");//为什么要将双引号转义为单引号
             System.out.println(httpResults + '\n');
